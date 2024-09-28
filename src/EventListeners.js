@@ -7,6 +7,7 @@ import { handleProjectFormSubmition, handleTaskFormSubmition, setEditingProject 
 const menuBtn = document.getElementById("menuBtn");
 const menu = document.getElementById("menuBar");
 const closeBtn = document.getElementById("closeBtn");
+const blackDiv = document.getElementById("blackBackground");
 const addTaskBtn = document.getElementById("addTaskBtn");
 const formContainer = document.getElementById("formContainer");
 const taskForm = document.getElementById("addTaskForm");
@@ -17,6 +18,7 @@ const priorityOptions = dropDown.getElementsByClassName("option");
 const addProjectBtn = document.getElementById("addProjectBtn");
 const projectForm = document.getElementById("addProjectForm");
 const cancelBtns = document.getElementsByClassName("cancelBtn");
+const confirmBtns = document.getElementsByClassName("confirmBtn");
 const filterLinks = document.getElementsByClassName("filter");
 const sortingInput = document.getElementById("sortingInput");
 const orderBtn = document.getElementById("orderBtn");
@@ -37,17 +39,26 @@ export default addEventListeners;
 const handleMenuDisplay = () => {
     menuBtn.addEventListener("click", () => {
         menu.classList.toggle("active");
+        blackDiv.classList.toggle("active");
     });
 
     closeBtn.addEventListener("click", () => {
         menu.classList.remove("active");
+        blackDiv.classList.remove("active");
     });
+
+    blackDiv.addEventListener("click", () => {
+        menu.classList.remove("active");
+        blackDiv.classList.remove("active");
+    })
 }
 
 const handleTaskFormDisplay = () => {
     addTaskBtn.addEventListener("click", () => {
+        const confirmBtn = confirmBtns[1];
         setEditingProject(false,"","");
         displayTaskForm("","","","Medium");
+        confirmBtn.innerText = "Add Task";
         displayProjectSelectionList();
         
     });
@@ -65,11 +76,22 @@ const handleTaskFormDisplay = () => {
         });
     }
 
+    formContainer.addEventListener("click", () => {
+        formContainer.classList.remove("active");
+        taskForm.classList.remove("active");
+        projectForm.classList.remove("active");
+
+    });
+
     const cancelBtn = cancelBtns[1];
     cancelBtn.addEventListener("click", () => {
         formContainer.classList.remove("active");
         taskForm.classList.remove("active");
     });
+
+    taskForm.addEventListener("click",(event) => {
+        event.stopPropagation();
+    })
 
     taskForm.addEventListener("submit",(event) => {
         event.preventDefault();
@@ -82,7 +104,9 @@ const handleTaskFormDisplay = () => {
 
 const handleProjectFormDisplay = () => {
     addProjectBtn.addEventListener("click", () => {
+        const confirmBtn = confirmBtns[0];
         displayProjectForm("");
+        confirmBtn.innerText = "Add Project";
         setEditingProject(false,"");
     });
 
@@ -91,6 +115,10 @@ const handleProjectFormDisplay = () => {
         formContainer.classList.remove("active");
         projectForm.classList.remove("active");
     });
+
+    projectForm.addEventListener("click",(event) => {
+        event.stopPropagation();
+    })
 
     projectForm.addEventListener("submit",(event) => {
         event.preventDefault();
@@ -109,6 +137,8 @@ const handleFilteredContentDisplay = () => {
         displayContent("Today",tasks);
         defaultSortingInputValues();
         changeActiveLink(event.target.parentNode);
+        menu.classList.remove("active");
+        blackDiv.classList.remove("active");
     });
 
     filterLinks[1].addEventListener("click",(event) => {
@@ -118,6 +148,8 @@ const handleFilteredContentDisplay = () => {
         displayContent("This Week",tasks);
         defaultSortingInputValues();
         changeActiveLink(event.target.parentNode);
+        menu.classList.remove("active");
+        blackDiv.classList.remove("active");
     });
 
     filterLinks[2].addEventListener("click",(event) => {
@@ -127,6 +159,8 @@ const handleFilteredContentDisplay = () => {
         displayContent("This Month",tasks);
         defaultSortingInputValues();
         changeActiveLink(event.target.parentNode);
+        menu.classList.remove("active");
+        blackDiv.classList.remove("active");
     });
 
     filterLinks[3].addEventListener("click",(event) => {
@@ -136,6 +170,8 @@ const handleFilteredContentDisplay = () => {
         displayContent("Overdue",tasks);
         defaultSortingInputValues();
         changeActiveLink(event.target.parentNode);
+        menu.classList.remove("active");
+        blackDiv.classList.remove("active");
     });
 
     filterLinks[4].addEventListener("click",(event) => {
@@ -145,6 +181,8 @@ const handleFilteredContentDisplay = () => {
         displayContent("All Tasks",tasks);
         defaultSortingInputValues();
         changeActiveLink(event.target.parentNode);
+        menu.classList.remove("active");
+        blackDiv.classList.remove("active");
     });
 }
 

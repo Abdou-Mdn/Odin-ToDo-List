@@ -10,6 +10,8 @@ import { selectContent } from "./ContentSelection";
 export function displayProjectsList () {
     const projects = getAllProjects();
     const projectsList = document.getElementById("projectsList");
+    const menu = document.getElementById("menuBar");
+    const blackDiv = document.getElementById("blackBackground");
 
     projectsList.replaceChildren();
     for (let i=0; i< projects.length; i++) {
@@ -24,6 +26,8 @@ export function displayProjectsList () {
             selectContent(title);
             const tasks = getSortedTasks();
             displayContent(title,tasks);
+            menu.classList.remove("active");
+            blackDiv.classList.remove("active");
         });
         li.appendChild(link);
 
@@ -31,8 +35,10 @@ export function displayProjectsList () {
         editBtn.className = "editBtn";
         editBtn.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
         editBtn.addEventListener("click",() => {
-            displayProjectForm(title);
+            const confirmBtn = document.getElementsByClassName("confirmBtn")[0];
             setEditingProject(true,title);
+            displayProjectForm(title);
+            confirmBtn.innerText = "Update Project";
         });
         li.appendChild(editBtn);
 
@@ -48,7 +54,6 @@ export function displayProjectsList () {
             const tasks = getSortedTasks();
             displayContent("Today",tasks);
             defaultSortingInputValues();
-            
         });
         li.appendChild(trashBtn);
 
@@ -166,9 +171,11 @@ export function displayContent(title,tasks = []) {
         editBtn.className = "editTaskBtn";
         editBtn.innerText = "Edit";
         editBtn.addEventListener("click", () => {
+            const confirmBtn = document.getElementsByClassName("confirmBtn")[1];
             setEditingTask(true,task.title,task.project);
             displayTaskForm(task.title,task.description,task.dueDate,task.priority);
             displayProjectSelectionList();
+            confirmBtn.innerText = "Update Task";
         });
         buttonsDiv.appendChild(editBtn);
 
