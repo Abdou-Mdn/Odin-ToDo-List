@@ -3,6 +3,7 @@ import { getFilteredTasks, selectContent } from "./ContentSelection";
 import { getSortedTasks, sortTasks } from "./ContentSorting";
 import { displayProjectSelectionList, displaySelectedPriority, displayProjectForm, displayTaskForm, displayContent } from "./Display";
 import { handleProjectFormSubmition, handleTaskFormSubmition, setEditingProject } from "./Forms";
+import { setEditingTask } from "./Forms";
 
 const menuBtn = document.getElementById("menuBtn");
 const menu = document.getElementById("menuBar");
@@ -56,7 +57,7 @@ const handleMenuDisplay = () => {
 const handleTaskFormDisplay = () => {
     addTaskBtn.addEventListener("click", () => {
         const confirmBtn = confirmBtns[1];
-        setEditingProject(false,"","");
+        setEditingTask(false,"","");
         displayTaskForm("","","","Medium");
         confirmBtn.innerText = "Add Task";
         displayProjectSelectionList();
