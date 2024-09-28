@@ -46,9 +46,10 @@ const handleMenuDisplay = () => {
 
 const handleTaskFormDisplay = () => {
     addTaskBtn.addEventListener("click", () => {
-        displayTaskForm("","","","","Medium");
-        displayProjectSelectionList();
         setEditingProject(false,"","");
+        displayTaskForm("","","","Medium");
+        displayProjectSelectionList();
+        
     });
 
     selectedPriority.addEventListener("click",() => {
