@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoIT</title>
+    <link rel="icon" type="image/x-icon" href="images/logo-white.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <div id="formContainer">
+        <form id="addProjectForm">
+            <input type="text" id="projectTitle" placeholder="Project Name" autofocus required autocomplete="off">
+            <div class="buttons">
+                <button type="button" class="cancelBtn">Cancel</button>
+                <button type="submit" class="confirmBtn">Add Project</button>
+            </div>
+        </form>
+        <form id="addTaskForm">
+            <input type="text" id="taskTitle" placeholder="Task Name" autofocus required autocomplete="off">
+            <textarea id="taskDescription" placeholder="Description" rows="2"></textarea>
+            <div id="dateInput">
+                <input type="text" id="taskDueDate" placeholder="Select Date" required>
+                <i class="fa-regular fa-calendar"></i>
+            </div>
+            <div id="selectInputs">
+                <select id="projectSelect" required>
+                </select>
+                <div id="customSelect">
+                    <input type="hidden" id="taskPriority" value="Medium">
+                    <div id="selected">
+                        <div class="flag Medium"></div>
+                        Medium
+                    </div>
+                    <div id="dropDown">
+                        <div class="option">
+                            <div class="flag High"></div>
+                            High
+                        </div>
+                        <div class="option">
+                            <div class="flag Medium"></div>
+                            Medium
+                        </div>
+                        <div class="option">
+                            <div class="flag Low"></div>
+                            Low
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons">
+                <button type="button" class="cancelBtn">Cancel</button>
+                <button type="submit" class="confirmBtn">Add Task</button>
+            </div>
+        </form>
+    </div>
+    <header>
+        <button id="menuBtn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <h1>
+            <img src="images/logo.png" alt="Logo">
+            Do 
+            <span>IT</span>
+        </h1>
+    </header>
+    <aside id="menuBar">
+        <section>
+            <div id="profile">
+                <i class="fa-solid fa-circle-user"></i>
+                Username
+            </div>
+            <button id="closeBtn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </section>
+        <button id="addTaskBtn">
+            <i class="fa-solid fa-plus"></i>
+            Add Task
+        </button>
+        <ul>
+            <li id="defaultActiveLink" class="filter active"><a>
+                <i class="fa-solid fa-calendar-day"></i>
+                Today
+            </a></li>
+            <li class="filter"><a>
+                <i class="fa-solid fa-calendar-week"></i>
+                This Week
+            </a></li>
+            <li class="filter"><a>
+                <i class="fa-solid fa-calendar-days"></i>
+                This Month
+            </a></li>
+            <li class="filter"><a>
+                <i class="fa-solid fa-circle-exclamation"></i>
+                Overdue
+            </a></li>
+            <li  class="filter"><a>
+                <i class="fa-solid fa-list-check"></i>
+                All Tasks
+            </a></li>
+        </ul>
+        <div class="title"">
+            <h2>Projects</h2>
+            <button id="addProjectBtn">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+        <ul id="projectsList">
+            
+        </ul>
+    </aside>
+    <main>
+        <div id="top">
+            <div class="infos">
+                <h2 id="heading">Today</h2>
+                <span id="tasksCounter"></span>
+            </div>
+            <div class="sorting">
+                <label for="sortingInput">Sort by:</label>
+                <select id="sortingInput" name="sortingInput">
+                    <option value="Default" selected>Default</option>
+                    <option value="Name">Name</option>
+                    <option value="Date">Date</option>
+                    <option value="Priority">Priority</option>
+                    <option value="Status">Status</option>
+                </select>
+                <button id="orderBtn" value="desc">
+                    <i id="arrow" class="fa-solid fa-chevron-down"></i>
+                </button>
+                <button id="sortBtn">sort</button>
+            </div>
+        </div>
+        <ul id="content">
+        </ul>
+    </main>
+    <footer>
+        <p>&copy; Copyright, 2024</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</body>
+</html>

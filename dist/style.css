@@ -1,0 +1,644 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+
+:root {
+    --TEXT-COLOR-1: #18181b;
+    --TEXT-COLOR-2: #4b5563;
+    --BG-COLOR-1: #f4f4f5;
+    --BG-COLOR-2: #e5e5e5;
+    --BG-COLOR-3: #a5b4fc;
+    --ACTION-COLOR: #1e40af; /* #4338ca #1d4ed8*/
+    --HP-COLOR: #dc2626;
+    --MP-COLOR: #d97706;
+    --LP-COLOR: #16a34a;
+
+    --BOX-SHADOW: 0 0 10px #00000062;
+    --TRANSITION: all 0.2s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "poppins", sans-serif;
+    outline: none;
+}
+
+body {
+    font-size: 17px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    grid-template-rows: 5rem 1fr 3rem;
+    gap: 0;
+    position: relative;
+}
+
+/* *********** Forms ************* */
+#formContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.711);
+    z-index: 5;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#formContainer.active {
+    display: flex;
+}
+
+#addProjectForm, #addTaskForm {
+    max-width: 25rem;
+    padding: 1rem;
+    background-color: var(--BG-COLOR-1);
+    border-radius: 0.5rem;
+    box-shadow: var(--BOX-SHADOW);
+    font-size: 1.2rem;
+    display: none;
+}
+
+#addProjectForm.active, #addTaskForm.active {
+    display: block;
+}
+
+#addProjectForm input, #addTaskForm input{
+    position: relative;
+    width: 100%;
+    height: 1.8rem;
+    font-size: 1.1rem;
+    border: none;
+    background-color: transparent;
+    color: var(--TEXT-COLOR-1);
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    border-bottom: 1px solid var(--TEXT-COLOR-2);
+    z-index: 1;
+}
+
+textarea {
+    width: 100%;
+    font-size: 1.1rem;
+    border: none;
+    background-color: var(--BG-COLOR-1);
+    color: var(--TEXT-COLOR-1);
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    border-bottom: 1px solid var(--TEXT-COLOR-2);
+    resize: none;
+}
+
+#dateInput {
+    position: relative;
+    cursor: pointer;
+}
+
+#dateInput i {
+    position: absolute;
+    top: 0.2rem;
+    right: 1rem;
+    font-size: 1.3rem;
+    color: var(--TEXT-COLOR-1);
+    z-index: 0;
+}
+
+#selectInputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#projectSelect {
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: var(--BG-COLOR-1);
+    color: var(--TEXT-COLOR-1);
+    border: none;
+    border-bottom: 1px solid var(--TEXT-COLOR-2);
+    cursor: pointer;
+}
+
+
+#customSelect {
+    position: relative;
+    margin-inline: 1rem;
+    font-size: 1rem;
+    width: 7rem;
+}
+
+#selected, .option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--BG-COLOR-1);
+    color: var(--TEXT-COLOR-1);
+    padding: 0.2rem;
+    border-bottom: 1px solid var(--TEXT-COLOR-2);
+}
+
+#selected {
+    padding: 0.5rem 0.2rem;
+}
+
+.option:hover {
+    background-color: var(--BG-COLOR-2);
+}
+
+.flag {
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+}
+
+.flag.High {
+    background-color: var(--HP-COLOR);
+}
+
+.flag.Medium {
+    background-color: var(--MP-COLOR);
+}
+
+.flag.Low {
+    background-color: var(--LP-COLOR);
+}
+
+#dropDown {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    right: 0;
+    padding: 0.2rem;
+    background-color: var(--BG-COLOR-1);
+    border-radius: 0.2rem;
+    box-shadow: var(--BOX-SHADOW);
+    z-index: 1;
+    display: none;
+}
+
+#dropDown.active {
+    display: block;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0.5rem auto;
+    padding-top: 0.5rem;
+}
+
+.buttons button {
+    padding: 0.2rem 0.5rem;
+    margin-inline: 0.5rem;
+    border: none;
+    border-radius: 0.3rem;
+    color: var(--BG-COLOR-1);
+    cursor: pointer;
+    transition: var(--TRANSITION);
+}
+
+.buttons button:hover, .buttons button:focus {
+    transform: scale(1.1);
+}
+
+.cancelBtn {
+    background-color: var(--HP-COLOR);
+}
+
+.confirmBtn {
+    background-color: var(--ACTION-COLOR);
+}
+
+/* ************** Header ************* */
+header {
+    background-color: var(--BG-COLOR-1);
+    grid-column: 1/3;
+    grid-row: 1/2;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    box-shadow: var(--BOX-SHADOW) ;
+    position: relative;
+}
+
+#menuBtn {
+    position: absolute;
+    left: 3rem;
+    background-color: var(--BG-COLOR-1);
+    color: var(--TEXT-COLOR-1);
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+}
+
+h1 {
+    font-family: "Fraunces", serif;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 span {
+    font-family: "Fraunces", serif;
+    color: var(--ACTION-COLOR);
+} 
+
+h1 img {
+    height: 2.5rem;
+    width: auto;
+    margin-inline: 0.5rem;
+}
+
+/* *************** Side Bar *************** */
+aside {
+    background-color: var(--BG-COLOR-2);
+    grid-column: 1/2;
+    grid-row: 2/3;
+    height: 90vh;
+    overflow-y: scroll;
+    z-index: 2;
+    padding: 1rem 0;
+    box-shadow: var(--BOX-SHADOW);
+    transition: var(--TRANSITION);
+}
+
+aside section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 1.5rem;
+}
+
+#profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+}
+
+#profile i {
+    font-size: 2rem;
+}
+
+#closeBtn {
+    background-color: var(--BG-COLOR-2);
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: none;
+}
+
+#addTaskBtn, aside ul li, .title {
+    font-size: 1.1rem;
+    width: 100%;
+    text-align: left;
+    margin: 0.5rem 0;
+    padding: 0.2rem 2rem;
+    border-radius: 0.5rem;
+    transition: var(--TRANSITION);
+}
+
+#addTaskBtn i, aside ul li i {
+    margin-right: 1rem;
+}
+
+
+#addTaskBtn {
+    border: none;
+    background-color: var(--BG-COLOR-2);
+    color: var(--ACTION-COLOR);
+    cursor: pointer;
+}
+
+#addTaskBtn:hover, #addTaskBtn:focus {
+    background-color: var(--ACTION-COLOR);
+    color: var(--BG-COLOR-1);
+  
+}
+
+aside ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+aside ul li a {
+    width: 100%;
+}
+
+aside ul li:hover {
+    padding-left: 2.5rem;
+}
+
+aside ul li.active {
+    background-color: var(--BG-COLOR-3);
+    color: var(--ACTION-COLOR);
+}
+
+.title {
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title h2, .infos h2, h3 {
+    font-family: "Fraunces", serif;
+}
+
+#addProjectBtn, .deleteBtn, .editBtn {
+    background-color: transparent;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--TRANSITION);
+}
+
+#addProjectBtn:hover, #addProjectBtn:focus {
+    font-size: 1.3rem;
+}
+
+aside ul li .deleteBtn i, aside ul li .editBtn i {
+    margin-inline: 0.5rem;
+}
+
+.deleteBtn:hover, .deleteBtn:focus {
+    font-size: 1.2rem;
+    color: var(--HP-COLOR);
+}
+
+.editBtn:hover, .editBtn:focus {
+    font-size: 1.2rem;
+    color: var(--ACTION-COLOR);
+}
+
+/* ************* Main ****************** */
+main {
+    background-color: var(--BG-COLOR-1);
+    grid-column: 2/3;
+    grid-row: 2/3;
+    height: 90vh;
+    overflow-y: scroll;
+    padding: 1rem 3rem;
+}
+
+#top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1rem;
+}
+
+#heading {
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+#tasksCounter {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--TEXT-COLOR-2);
+    margin: 0.5rem;
+}
+
+.sorting label, #sortingInput {
+    font-size: 0.9rem;
+    color: var(--TEXT-COLOR-2);
+    background-color: var(--BG-COLOR-1);
+    border: none;
+    margin-inline: 0.2rem;
+}
+
+#sortingInput{
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#orderBtn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#sortBtn {
+    display: none;
+}
+
+#content {
+    list-style: none;
+    margin: 1rem 0;
+}
+
+.task {
+    padding: 1.2rem;
+    margin-right: 2rem;
+    border-radius: 0.5rem;
+    overflow-y: hidden;
+    max-height: 4rem;
+    transition: max-height 0.3s linear;
+    position: relative;
+}
+
+.task:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 1px;
+    background-color: var(--TEXT-COLOR-2);
+}
+
+.task:hover {
+    background-color: var(--BG-COLOR-2);
+    max-height: 30rem;
+}
+
+
+.basicInfos {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    height: 3rem;
+    font-size: 1.2rem;
+}
+
+.checked h3 {
+    text-decoration: line-through;
+}
+
+.checkBtn {
+    background-color: transparent;
+    color: var(--TEXT-COLOR-2);
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--TRANSITION);
+}
+
+.checked .checkBtn {
+    color: var(--ACTION-COLOR);
+}
+
+.checkBtn:hover {
+    font-size: 1.3rem;
+    color: var(--ACTION-COLOR);
+}
+
+.moreInfos {
+    opacity: 0;
+    transition: opacity 0.3s linear;
+}
+
+.task:hover .moreInfos {
+    opacity: 1;
+}
+
+.description {
+    font-size: 1rem;
+    margin: 0.3rem auto;
+    color: var(--TEXT-COLOR-2);
+}
+
+.priority {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: 1rem;
+    width: 8rem;
+    float: right;   
+    margin-right: 1.5rem;
+}
+
+.date {
+    font-size: 1rem;
+    float: left;
+}
+
+.taskButtons {
+    clear: both;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 3rem;
+}
+
+.taskButtons button {
+    padding: 0.2rem 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: var(--BG-COLOR-1);
+    cursor: pointer;
+    transition: var(--TRANSITION);
+}
+
+.taskButtons button:hover {
+    transform: scale(1.05);
+}
+
+.editTaskBtn {
+    background-color: var(--ACTION-COLOR);
+}
+
+.deleteTaskBtn {
+    background-color: var(--HP-COLOR);
+}
+
+/* ************* Footer *************** */
+footer {
+    background-color: var(--BG-COLOR-2);
+    grid-column: 1/3;
+    grid-row: 3/4;
+    z-index: 3;
+    border-top: 1px solid var(--TEXT-COLOR-2);
+    text-align: center;
+    padding-top: 0.6rem;
+}
+
+
+/* *********************** MEDIA QUERIES ********************** */
+
+@media screen and (max-width: 720px) {
+    body {
+        grid-template-columns: 1fr;
+    }
+
+
+    #menuBtn {
+        display: block;
+    }
+
+    aside {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 60%;
+    }
+
+    aside.active {
+        left: 0;
+    }
+
+    #closeBtn {
+        display: block;
+    }
+
+    #addTaskBtn {
+        background-color: var(--ACTION-COLOR);
+        color: var(--BG-COLOR-1);
+    }
+
+    main {
+        grid-column: 1/2;
+    }
+
+    #top {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    #tasksCounter {
+        text-align: center;
+    }
+
+    .task {
+        margin: 0;
+        max-height: 100rem;
+    }
+
+    .moreInfos {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    aside {
+        width: 75%;
+    }
+
+    .priority {
+        float: none;
+        margin: 0;
+    }
+
+    .date {
+        float: none;
+    }
+}
