@@ -48,6 +48,7 @@ export function displayProjectsList () {
         trashBtn.addEventListener("click",() => {
             const defaultLink = document.getElementById("defaultActiveLink");
             deleteProject(title);
+            saveProjectsToLocalStorage();
             displayProjectsList();   
             changeActiveLink(defaultLink);
             selectContent("Today");
