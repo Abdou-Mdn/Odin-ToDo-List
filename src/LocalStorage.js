@@ -9,5 +9,5 @@ export function loadProjectsFromLocalStorage() {
 
 export function saveProjectsToLocalStorage() {
     const projects = getAllProjects(); 
-    localStorage.setItem('projects', JSON.stringify(projects)); // Convert projects to a JSON string and save
+    localStorage.setItem('projects', JSON.stringify(projects)); 
 }
